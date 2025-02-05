@@ -221,6 +221,9 @@ app.get(
     const { id } = req.params;
     const order = await prisma.order.findUniqueOrThrow({
       where: { id },
+      include: {
+        orderItems: true,
+      },
     });
     res.send(order);
   })
