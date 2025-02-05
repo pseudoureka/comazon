@@ -127,6 +127,20 @@ app.get(
   })
 );
 
+app.get(
+  "/users/:id/orders",
+  asyncHandler(async (req, res) => {
+    const { id } = req.params;
+    const { orders } = await prisma.user.findUniqueOrThrow({
+      where: { id },
+      include: {
+        orders: true,
+      },
+    });
+    res.send(orders);
+  })
+);
+
 /*********** products ***********/
 
 app.get(
