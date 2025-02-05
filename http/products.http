@@ -22,7 +22,7 @@ Content-Type: application/json
 
 ###
 
-PATCH http://localhost:3000/products/f8013040-b076-4dc4-8677-11be9a17162f
+PATCH http://localhost:3000/products/f8013040-b076-4dc4-8677-11be9a17162fwe123
 Content-Type: application/json
 
 {
@@ -32,4 +32,4 @@ Content-Type: application/json
 
 ###
 
-DELETE http://localhost:3000/products/f8013040-b076-4dc4-8677-11be9a17162f
+DELETE http://localhost:3000/products/f8013040-b076-4dc4-8677-11123be9a17162f
