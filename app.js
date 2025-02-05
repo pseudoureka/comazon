@@ -239,6 +239,12 @@ app.get(
         orderItems: true,
       },
     });
+
+    let total = 0;
+    order.orderItems.forEach((orderItem) => {
+      total += orderItem.quantity * orderItem.unitPrice;
+    });
+    order.total = total;
     res.send(order);
   })
 );

@@ -36,3 +36,8 @@ Content-Type: application/json
 ###
 
 DELETE http://localhost:3000/users/b8f11e76-0a9e-4b3f-bccf-8d9b4fbf331e
+
+
+###
+
+GET http://localhost:3000/users/6c3a18b0-11c5-4d97-9019-9ebe3c4d1317/orders
