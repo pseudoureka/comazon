@@ -29,11 +29,14 @@ Content-Type: application/json
 
 ###
 
-PATCH http://localhost:3000/users/b8f11e76-0a9e-4b3f-bccf-8d9b4fbf331e
+PATCH http://localhost:3000/users/a8ae7e71-4a23-4df0-9dba-a904cf0abc9f
 Content-Type: application/json
 
 {
-  "address": "서울특별시 강남구 무실로 234번길 45-6"
+  "email": "yjkim2@example.com",
+  "userPreference": {
+    "receiveEmail": true
+  }
 }
 
 ###
