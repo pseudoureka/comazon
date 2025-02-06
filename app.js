@@ -297,10 +297,34 @@ app.post(
   "/orders",
   asyncHandler(async (req, res) => {
     assert(req.body, CreateOrder);
-    const { orderItems, ...orderFields } = req.body;
+    const { orderItems, userId } = req.body;
+    const productIds = orderItems.map((orderItem) => orderItem.productId);
+    const products = await prisma.product.findMany({
+      where: {
+        id: {
+          in: productIds,
+        },
+      },
+    });
+
+    function getQuantity(productId) {
+      const orderItem = orderItems.find((orderItem) => orderItem.productId === productId);
+      return orderItem.quantity;
+    }
+
+    // 재고 확인
+    const isSufficientStock = products.every((product) => {
+      const { id, stock } = product;
+      return stock >= getQuantity(id);
+    });
+
+    if (!isSufficientStock) {
+      throw new Error("재고가 부족합니다.");
+    }
+
     const order = await prisma.order.create({
       data: {
-        ...orderFields,
+        userId,
         orderItems: {
           create: orderItems,
         },

@@ -2,7 +2,7 @@ GET http://localhost:3000/orders
 
 ###
 
-GET http://localhost:3000/orders/9fde1702-08d7-407c-8e6e-65e24f6a8237
+GET http://localhost:3000/orders/2ef57a3c-b1e0-4665-8ffc-69d214b44563
 
 ###
 
@@ -10,7 +10,19 @@ POST http://localhost:3000/orders
 Content-Type: application/json
 
 {
-  "userId": "70e1e61d-f2ae-4d7d-bf8f-d65eafdb6a45"
+  "userId": "70e1e61d-f2ae-4d7d-bf8f-d65eafdb6a45",
+  "orderItems": [
+    {
+      "productId": "1e112c02-7c92-4d52-b76e-485e41e3f64d",
+      "unitPrice": 59000,
+      "quantity": 10
+    },
+    {
+      "productId": "f751e63f-686d-42d4-898e-3ef6d4137908",
+      "unitPrice": 79000,
+      "quantity": 2
+    }
+  ]
 }
 
 ###
@@ -24,4 +36,4 @@ Content-Type: application/json
 
 ###
 
-DELETE http://localhost:3000/orders/9fde1702-08d7-407c-8e6e-65e24f6a8237
+DELETE http://localhost:3000/orders/20c34b5f-9c7c-44e8-9594-4a372aefff24
