@@ -2,7 +2,7 @@ import * as dotenv from "dotenv";
 dotenv.config();
 import express from "express";
 import { PrismaClient, Prisma } from "@prisma/client";
-import { assert } from "superstruct";
+import { assert, create } from "superstruct";
 import {
   CreateUser,
   PatchUser,
@@ -272,8 +272,17 @@ app.post(
   "/orders",
   asyncHandler(async (req, res) => {
     assert(req.body, CreateOrder);
+    const { orderItems, ...orderFields } = req.body;
     const order = await prisma.order.create({
-      data: req.body,
+      data: {
+        ...orderFields,
+        orderItems: {
+          create: orderItems,
+        },
+      },
+      include: {
+        orderItems: true,
+      },
     });
     res.status(201).send(order);
   })

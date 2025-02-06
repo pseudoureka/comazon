@@ -40,6 +40,17 @@ export const PatchProduct = s.partial(CreateProduct);
 
 export const CreateOrder = s.object({
   userId: Uuid,
+  orderItems: s.size(
+    s.array(
+      s.object({
+        productId: Uuid,
+        unitPrice: s.min(s.number(), 0),
+        quantity: s.min(s.integer(), 1),
+      })
+    ),
+    1,
+    Infinity
+  ),
 });
 
 export const PatchOrder = s.object({
