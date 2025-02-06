@@ -333,6 +333,21 @@ app.post(
         orderItems: true,
       },
     });
+
+    // 재고 차감
+    const queries = productIds.map((productId) => {
+      return prisma.product.update({
+        where: { id: productId },
+        data: {
+          stock: {
+            decrement: getQuantity(productId),
+          },
+        },
+      });
+    });
+
+    await Promise.all(queries);
+
     res.status(201).send(order);
   })
 );

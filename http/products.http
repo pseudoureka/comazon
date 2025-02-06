@@ -6,7 +6,6 @@ GET http://localhost:3000/products?order=priceLowest&category=ELECTRONICS&limit=
 ###
 
 GET http://localhost:3000/products/1e112c02-7c92-4d52-b76e-485e41e3f64d
-
 ###
 
 POST http://localhost:3000/products
