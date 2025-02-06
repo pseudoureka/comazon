@@ -6,11 +6,21 @@ GET http://localhost:3000/users?limit=2&offset=2&order=oldest
 
 ###
 
-GET http://localhost:3000/users/70e1e61d-f2ae-4d7d-bf8f-d65eafdb6a45
+GET http://localhost:3000/users/6c3a18b0-11c5-4d97-9019-9ebe3c4d1317
 
 ###
 
 GET http://localhost:3000/users/6c3a18b0-11c5-4d97-9019-9ebe3c4d1317/saved-products
+
+###
+
+POST http://localhost:3000/users/6c3a18b0-11c5-4d97-9019-9ebe3c4d1317/saved-products
+Content-Type: application/json
+
+{
+  "productId": "1e112c02-7c92-4d52-b76e-485e41e3f64d"
+}
+
 
 ###
 

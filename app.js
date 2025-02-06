@@ -10,6 +10,7 @@ import {
   PatchProduct,
   CreateOrder,
   PatchOrder,
+  PostSavedProduct,
 } from "./structs.js";
 
 const prisma = new PrismaClient();
@@ -138,6 +139,30 @@ app.get(
     const { id } = req.params;
     const { savedProducts } = await prisma.user.findUniqueOrThrow({
       where: { id },
+      include: {
+        savedProducts: true,
+      },
+    });
+    res.send(savedProducts);
+  })
+);
+
+app.post(
+  "/users/:id/saved-products",
+  asyncHandler(async (req, res) => {
+    assert(req.body, PostSavedProduct);
+    const { id: userId } = req.params;
+    const { productId } = req.body;
+    const { savedProducts } = await prisma.user.update({
+      where: { id: userId },
+      data: {
+        savedProducts: {
+          connect: {
+            id: productId,
+          },
+        },
+      },
+
       include: {
         savedProducts: true,
       },
