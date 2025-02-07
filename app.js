@@ -322,22 +322,10 @@ app.post(
       throw new Error("재고가 부족합니다.");
     }
 
-    const order = await prisma.order.create({
-      data: {
-        userId,
-        orderItems: {
-          create: orderItems,
-        },
-      },
-      include: {
-        orderItems: true,
-      },
-    });
-
     // 재고 차감
     const queries = productIds.map((productId) => {
       return prisma.product.update({
-        where: { id: productId },
+        where: { id: 123 },
         data: {
           stock: {
             decrement: getQuantity(productId),
@@ -346,7 +334,20 @@ app.post(
       });
     });
 
-    await Promise.all(queries);
+    const [order] = await prisma.$transaction([
+      prisma.order.create({
+        data: {
+          userId,
+          orderItems: {
+            create: orderItems,
+          },
+        },
+        include: {
+          orderItems: true,
+        },
+      }),
+      ...queries,
+    ]);
 
     res.status(201).send(order);
   })
